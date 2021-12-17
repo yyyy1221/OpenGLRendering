@@ -1,0 +1,46 @@
+﻿  shader.cpp
+  main.cpp
+  코드를 생성하고 있습니다...
+shader.obj : error LNK2019: __imp____glewAttachShader"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewCompileShader"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewCreateProgram"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewCreateShader"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewDeleteShader"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewDetachShader"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewGetProgramInfoLog"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewGetProgramiv"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewGetShaderInfoLog"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewGetShaderiv"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewLinkProgram"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+shader.obj : error LNK2019: __imp____glewShaderSource"unsigned int __cdecl LoadShaders(char const *,char const *)" (?LoadShaders@@YAIPBD0@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp__glewInit@0"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwInit"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwTerminate"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwWindowHint"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwCreateWindow"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwWindowShouldClose_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwPollEvents_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwSetInputMode"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwGetKey_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwGetMouseButton"void __cdecl mouse_callback(struct GLFWwindow *,double,double)" (?mouse_callback@@YAXPAUGLFWwindow@@NN@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwSetCursorPosCallback"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwSetScrollCallback"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwMakeContextCurrent"bool __cdecl gl_init(void)" (?gl_init@@YA_NXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: _glfwSwapBuffers_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewBindBuffer_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewBufferData_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewDeleteBuffers_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewGenBuffers_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewDeleteProgram_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewDisableVertexAttribArray_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewEnableVertexAttribArray_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewGetUniformLocation_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewUniformMatrix4fv_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewUseProgram_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewVertexAttribPointer_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewBindVertexArray_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewDeleteVertexArrays_main 함수에서 참조되는 확인할 수 없는 외부 기호
+main.obj : error LNK2019: __imp____glewGenVertexArrays_main 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Users\Heeyeon\source\repos\OpenGLRendering\OpenGLRendering\lib\glfw3.lib : warning LNK4272: 'x64' 라이브러리 컴퓨터 종류가 'x86' 대상 컴퓨터 종류와 충돌합니다.
+lib\glew32.lib : warning LNK4272: 'x64' 라이브러리 컴퓨터 종류가 'x86' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\Heeyeon\source\repos\OpenGLRendering\Debug\OpenGLRendering.exe : fatal error LNK1120: 40개의 확인할 수 없는 외부 참조입니다.
