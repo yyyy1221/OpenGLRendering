@@ -170,8 +170,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="common\shader.hpp" />
-    <ClInclude Include="cube.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="volumeloader.h" />
   </ItemGroup>

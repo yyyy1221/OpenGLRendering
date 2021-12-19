@@ -32,10 +32,10 @@
     <ClInclude Include="common\shader.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cube.h">
+    <ClInclude Include="volumeloader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="volumeloader.h">
+    <ClInclude Include="camera.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

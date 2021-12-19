@@ -38,19 +38,16 @@ glm::vec3 mTargetPos = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 mUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 mRight = glm::vec3(0.0f, 0.0f, 0.0f);
 
-struct Volume {
-	GLubyte* pData;
-	std::vector<float> scalars;
-	std::vector<glm::vec3> gradients;
-}volumeData;
-
 const float MOUSE_SENSITIVITY = 0.25f;
 
 bool gl_init(void);
 void scroll_callback(GLFWwindow*, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double posX, double posY);
 
-
+unsigned int vol_tex_obj;
+unsigned int tff_tex_obj;
+void readVolume(std::string file_name);
+void TFFtoTexture();
 
 int main(void) {
 	if (!gl_init()) {
@@ -58,30 +55,9 @@ int main(void) {
 		return 0;
 	}
 	
-	std::string file_name = "256x256x39_16bitsigned_BE.raw";
-	const char* volume = file_name.c_str();
-	FILE* fp;
-	if (!(fp = fopen(volume, "rb")))
-	{
-		std::cout << "ERROR : Failed to open " << volume << std::endl;
-		exit(EXIT_FAILURE);
-	}
+	readVolume("256x256x39_16bitsigned_BE.raw");
+	TFFtoTexture();
 
-	std::cout << "SUCCESS : Opened " << volume << std::endl;
-
-	size_t size = 256*256*39*2-1;
-	GLubyte* data = new GLubyte[size];
-	size = (size - 1) / 2;
-	
-	if (fread(data, sizeof(char), size, fp) != size)
-	{
-		std::cout << "ERROR : Failed to read " << volume << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	fclose(fp);
-
-
-	/**************************************************************************************/
 
 
 	GLuint VertexArrayID;
@@ -192,10 +168,12 @@ int main(void) {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 	glm::vec3 cubePos = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::mat4 mymodel, myview, myprojection, MVP;
+	mymodel = glm::mat4(1.0f);
 
 	do {
 
-		glm::mat4 mymodel, myview, myprojection, MVP;
+
 
 		glfwPollEvents();
 
@@ -204,8 +182,6 @@ int main(void) {
 		glUseProgram(ProgramID);
 
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
-		mymodel = glm::mat4(1.0f);
 
 		//setLookAt -> cubePos
 		mTargetPos = cubePos;
@@ -223,16 +199,12 @@ int main(void) {
 		//set Radius
 		mRadius = glm::clamp(gRadius, 2.0f, 80.0f);
 
-		mymodel = glm::translate(mymodel, cubePos);
-
 		//translation
 		mTargetPos.x -= offsetX;
 		mTargetPos.y += offsetY;
-		//mPosition.x += offsetX;
-		//mPosition.y += offsetY;
-		
-		myview = glm::lookAt(mPosition, mTargetPos, mUp);
 
+		mymodel = glm::translate(mymodel, cubePos);
+		myview = glm::lookAt(mPosition, mTargetPos, mUp);
 		myprojection = glm::perspective(glm::radians(fov), (float)gWindowWidth / (float)gWindowHeight, 0.1f, 100.0f);
 
 		MVP = myprojection * myview * mymodel;
@@ -334,4 +306,66 @@ void mouse_callback(GLFWwindow* window, double posX, double posY) {
 
 	lastMousePos.x = (float)posX;
 	lastMousePos.y = (float)posY;
+}
+
+void readVolume(std::string file_name) {
+	file_name = "256x256x39_16bitsigned_BE.raw";
+	const char* volume = file_name.c_str();
+
+	int width = 256;
+	int height = 256;
+	int depth = 39;
+
+	FILE* fp;
+	if (!(fp = fopen(volume, "rb")))
+	{
+		std::cout << "ERROR : Failed to open " << volume << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	std::cout << "SUCCESS : Opened " << volume << std::endl;
+
+	size_t size = 256 * 256 * 39 * 2 - 1;
+	signed short* data = new signed short[size];
+	size = (size - 1) / 2;
+
+	if (fread(data, sizeof(short), size, fp) != size)
+	{
+		std::cout << "ERROR : Failed to read " << volume << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	fclose(fp);
+
+	glGenTextures(1, &vol_tex_obj);
+	glBindTexture(GL_TEXTURE_3D, vol_tex_obj);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	std::cout << "Width, Height, Depth : " << width << ", " << height << ", " << depth << std::endl;
+	glTexImage3D(GL_TEXTURE_3D, 0, GL_R16, width, height, depth, 0, GL_RED, GL_SHORT, data);
+
+	delete[]data;
+	std::cout << "Volume Loaded on Texture " << std::endl;
+}
+
+void TFFtoTexture() {
+	float data[32768] = { 0, };
+	for (int i = 120; i < 325; i++) {
+		data[i] = (1 / 206) * i - (119 / 206);
+	}
+
+	glGenTextures(1, &tff_tex_obj);
+	glBindTexture(GL_TEXTURE_1D, tff_tex_obj);
+	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA, 256, 0, GL_RGBA, GL_FLOAT, data);
+
+	std::cout << "Transfer Function Loaded on Texture " << std::endl;
+
 }
